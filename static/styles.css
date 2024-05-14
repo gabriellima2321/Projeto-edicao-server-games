@@ -1,0 +1,202 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+}
+
+header {
+    background-color: #333;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#header-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+input[type="text"] {
+    padding: 5px;
+    font-size: 16px;
+}
+
+nav {
+    display: flex;
+    gap: 15px;
+}
+
+nav a {
+    color: #e0e0e0;
+    text-decoration: none;
+}
+
+#user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.username {
+    font-weight: bold;
+}
+
+.pro {
+    background-color: #ffcc00;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.support {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.settings-icon {
+    width: 20px;
+    cursor: pointer;
+}
+
+main {
+    display: flex;
+    padding: 20px;
+}
+
+#game-details {
+    flex: 3;
+    background-color: #282828;
+    padding: 20px;
+    margin-right: 20px;
+    border-radius: 8px;
+}
+
+#game-details h2 {
+    margin-top: 0;
+}
+
+.platforms span {
+    background-color: #444;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+#mods-section {
+    margin-top: 20px;
+}
+
+.mod-category {
+    margin-bottom: 20px;
+}
+
+.mod-category h3 {
+    margin-bottom: 10px;
+}
+
+.mod-category ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.mod-category ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.toggle-btn {
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 60px;
+}
+
+.toggle-btn.off {
+    background-color: #ff4d4d; /* Red color for OFF */
+}
+
+.toggle-btn.on {
+    background-color: #4caf50; /* Green color for ON */
+}
+
+aside#sidebar {
+    flex: 1;
+    background-color: #282828;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.save-btn, .play-btn {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+.save-btn {
+    background-color: #ffcc00;
+}
+
+.play-btn {
+    background-color: #00bfff;
+    color: white;
+}
+
+.game-info p {
+    margin: 5px 0;
+}
+
+.game-info button {
+    width: 100%;
+    padding: 10px;
+    background-color: #444;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.range-container {
+    display: flex;
+    align-items: center;
+}
+
+input[type="range"] {
+    margin-right: 5px;
+    width: 200px; /* Adjust the width as needed */
+}
+
+#range-value {
+    font-weight: bold;
+}
+
+.descricao-input {
+    width: 500px; /* Defina o tamanho que desejar */
+}
+
+.number-input input[type=text] {
+    color: white; /* Define a cor do texto como branco */
+    background-color: transparent; /* Define o fundo como transparente */
+    border: none; /* Remove a borda padrão */
+    outline: none; /* Remove a aparência do foco */
+    width: 50px; /* Define a largura do campo */
+    text-align: center; /* Centraliza o texto */
+}
+
+input[type="password"] {
+    padding: 5px;
+    font-size: 16px;
+}
