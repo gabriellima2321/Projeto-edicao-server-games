@@ -38,6 +38,6 @@ def logout():  # put application's code here
     return redirect(url_for('login'))
 
 
-@app.route('/v_rising_server_edit')
+@app.route('/v_rising_server_edit', methods=['POST'])
 def v_rising_server_edit(): #Pagina de login
     return render_template('v_rising_server_edit.html')

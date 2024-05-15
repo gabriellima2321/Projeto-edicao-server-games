@@ -1,0 +1,29 @@
+﻿{
+  "Name": "[BR]TheFamilyGuy",
+  "Description": "Este servidor e dedicado a amigos de longa data. ",
+  "Port": 9876,
+  "QueryPort": 9877,
+  "MaxConnectedUsers": 10,
+  "MaxConnectedAdmins": 4,
+  "ServerFps": 60,
+  "SaveName": "[BR]TheFamilyGuy",
+  "Password": "biri1313",
+  "Secure": true,
+  "ListOnSteam": true,
+  "ListOnEOS": false,
+  "AutoSaveCount": 20,
+  "AutoSaveInterval": 120,
+  "CompressSaveFiles": true,
+  "GameSettingsPreset": "",
+  "GameDifficultyPreset": "",
+  "AdminOnlyDebugEvents": true,
+  "DisableDebugEvents": false,
+  "API": {
+    "Enabled": false
+  },
+  "Rcon": {
+    "Enabled": false,
+    "Port": 25575,
+    "Password": "biribiri1313"
+  }
+}
