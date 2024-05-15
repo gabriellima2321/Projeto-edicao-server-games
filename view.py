@@ -1,6 +1,13 @@
 from flask import Flask, render_template, request, redirect, flash, url_for, send_from_directory,session
 from authenticator import authenticate,inst_infuser
 from db_connection import app,Jogos,upload_dir,app
+from dataset import LeitorJSON
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+caminho=f"""{str(os.getenv('VRISING_JSON_LOCATE'))}"""
 
 @app.route('/')
 def index():  # put application's code here
@@ -38,6 +45,15 @@ def logout():  # put application's code here
     return redirect(url_for('login'))
 
 
-@app.route('/v_rising_server_edit', methods=['POST'])
+@app.route('/v_rising_server_edit', methods=['GET','POST'])
 def v_rising_server_edit(): #Pagina de login
-    return render_template('v_rising_server_edit.html')
+    if (request.method == 'POST'):
+        form_data = request.form
+        server_name = form_data.get('nome')
+        print(server_name)
+        return render_template('v_rising_server_edit.html', form_data=form_data)
+    
+    
+    leitor=LeitorJSON(caminho)
+    dados = leitor.obter_dado()
+    return render_template('v_rising_server_edit.html', info=dados)

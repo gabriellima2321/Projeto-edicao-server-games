@@ -1,12 +1,26 @@
 function toggleButton(button) {
-    if (button.classList.contains('off')) {
+
+    if (button.textContent == 'False') {
+        button.classList.remove('netral');
         button.classList.remove('off');
         button.classList.add('on');
-        button.textContent = 'ON';
+        button.textContent = 'True';
+        button.value='True';
     } else {
+        button.classList.remove('netral');
         button.classList.remove('on');
         button.classList.add('off');
-        button.textContent = 'OFF';
+        button.textContent = 'False';
+        button.value='False';
+    }
+}
+
+function typeButton(button){
+
+    if (button.textContent == 'False') {
+        return 'toggle-btn off';
+    } else {
+        return 'toggle-btn on';
     }
 }
 

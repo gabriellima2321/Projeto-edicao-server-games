@@ -122,12 +122,30 @@ main {
     width: 60px;
 }
 
+.toggle-btn.plus{
+    border: none;
+    color: black;
+    padding: 5px 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 20px;
+    text-align: center;
+}
+
+.toggle-btn.netral {
+    background: linear-gradient(90deg, white 0%, #ff4d4d 50%, #4caf50 100%); /* Red color for OFF */
+    color: black;
+    text-align: center;
+}
+
 .toggle-btn.off {
     background-color: #ff4d4d; /* Red color for OFF */
+    text-align: center;
 }
 
 .toggle-btn.on {
     background-color: #4caf50; /* Green color for ON */
+    text-align: center;
 }
 
 aside#sidebar {

@@ -19,7 +19,7 @@
             <div id="user-info">
                 <span class="username">MaximumMachine718</span>
                 <button class="pro">PRO</button>
-                <button class="support">Apoiar WeMod</button>
+                <button class="support">Apoiar B2</button>
                 <img src="settings-icon.png" alt="Settings" class="settings-icon">
             </div>
         </div>
@@ -32,88 +32,109 @@
                 <span>Xbox</span>
                 <span>Epic</span>
             </div>
-            <div id="mods-section">
-                <div class="mod-category">
-                    <h3>Configurações de Servidor</h3>
-                    <ul>
-                        <li>Nome: <input type="text" name="nome" class="nome-input" id="nome-input"></li>
-                        <li>Descrição: <input type="text" name="descricao" class="descricao-input" id="descricao-input"></li>
-                        <li>Numero Maximo de Players: 
-                            <div class="number-input">
-                                <button class="decrease-btn" onclick="decreaseValue('number-field-players',0)">-</button>
-                                <input type="text" id="number-field-players" value="0" max="15" readonly>
-                                <button class="increase-btn" onclick="increaseValue('number-field-players',15)">+</button>
-                            </div>
-                        </li>
-                        <li>Numero Maximo de ADM: 
-                            <div class="number-input">
-                                <button class="decrease-btn" onclick="decreaseValue('number-field-adm',0)">-</button>
-                                <input type="text" id="number-field-adm" value="0" max="6" readonly>
-                                <button class="increase-btn" onclick="increaseValue('number-field-adm',6)">+</button>
-                            </div>
-                        </li>
-                        <li>
-                            FPS do servidor:  
-                            <div class="range-container">
-                                <input type="range" min="10" max="99" value="50" id="fps-server-tax" oninput="updateRangeValue('fps-server-value',this.value)">
-                                <span id="fps-server-value">000</span>
-                            </div>
-                        </li>
-                        <li>Save Name:  <input type="text" name="save-nome" class="save-nome-input" id="save-nome-input"></li>
-                        <!-- Adicione mais mods aqui -->
-                    </ul>
+            <form  method="post">
+                <div id="mods-section">
+                    <div class="mod-category">
+                        <h3>Configurações de Servidor</h3>
+                        <ul>
+                            <li>Nome: <input type="text" name="nome" class="nome-input" id="nome-input" required value="{{ info.Name }}"></li>
+                            <li>Descrição: <input type="text" name="descricao" class="descricao-input" id="descricao-input" value="{{ info.Description }}"></li>
+                            <li>Numero Maximo de Players: 
+                                <div class="number-input">
+                                    <input class="toggle-btn plus" onclick="decreaseValue('number-field-players',0)" value="-" readonly>
+                                    <input type="text" id="number-field-players" value="{{ info.MaxConnectedUsers }}" max="15" readonly>
+                                    <input class="toggle-btn plus" onclick="increaseValue('number-field-players',15)" value="+" readonly>
+                                </div>
+                            </li>
+                            <li>Numero Maximo de ADM: 
+                                <div class="number-input">
+                                    <input class="toggle-btn plus" onclick="decreaseValue('number-field-adm',0)" value="-" readonly>
+                                    <input type="text" id="number-field-adm" value="{{ info.MaxConnectedAdmins }}" max="6" readonly>
+                                    <input class="toggle-btn plus" onclick="increaseValue('number-field-adm',6)" value="+" readonly>
+                                </div>
+                            </li>
+                            <li>
+                                FPS do servidor:  
+                                <div class="range-container">
+                                    <input type="range" min="10" max="99" value="{{ info.ServerFps }}" id="fps-server-tax" oninput="updateRangeValue('fps-server-value',this.value)">
+                                    <span id="fps-server-value">{{ info.ServerFps }}</span>
+                                </div>
+                            </li>
+                            <li>Save Name:  <input type="text" name="save-nome" class="save-nome-input" id="save-nome-input" value="{{ info.SaveName }}"></li>
+                            <!-- Adicione mais mods aqui -->
+                        </ul>
+                    </div>
+                    <div class="mod-category">
+                        <h3>Seguranças</h3>
+                        <ul>
+                            <li>Senha: 
+                                <input type="text" name="password" class="password-input" id="password-input" value="{{ info.Password }}">
+                            </li>
+                            <li>Segurança: <input class="toggle-btn netral" onclick="toggleButton(this)" value="{{ info.Secure }}" readonly></li>
+                            <li>Server Aparece na lista da Steam: <input class="toggle-btn netral" onclick="toggleButton(this)" value="{{ info.Secure }}" readonly></li>
+                            <li>Server Aparece na lista da EOS: <input class="toggle-btn netral" onclick="toggleButton(this)" value="{{ info.ListOnSteam }}" readonly></li>
+                            <!-- Adicione mais mods aqui -->
+                        </ul>
+                    </div>
+                    <div class="mod-category">
+                        <h3>Configurações de Save</h3>
+                        <ul>
+                            <li>AutoSaveCount: 
+                                <div class="range-container">
+                                    <input type="range" min="10" max="99" value="{{ info.AutoSaveCount }}" oninput="updateRangeValue('Auto-Save-Count',this.value)">
+                                    <span id="Auto-Save-Count">{{ info.AutoSaveCount }}</span>
+                                </div>
+                            </li>
+                            <li>AutoSaveInterval: 
+                                <div class="range-container">
+                                    <input type="range" min="100" max="999" value="{{ info.AutoSaveInterval }}" oninput="updateRangeValue('Auto-Save-Interval',this.value)">
+                                    <span id="Auto-Save-Interval">{{ info.AutoSaveInterval }}</span>
+                                </div>
+                            </li>
+                            <li>CompressSaveFiles:  <input class="toggle-btn netral" onclick="toggleButton(this)" value="{{ info.CompressSaveFiles }}" readonly></li>
+                            <!-- Adicione mais mods aqui -->
+                        </ul>
+                    </div>
+                    <div class="mod-category">
+                        <h3>Configurações de debug events</h3>
+                        <ul>
+                            <li>Apenas ADM para Debug Event: <input class="toggle-btn netral" onclick="toggleButton(this)" value="{{ info.AdminOnlyDebugEvents }}" readonly></li>
+                            <li>Disativar Debug Event: <input class="toggle-btn netral" onclick="toggleButton(this)" value="{{ info.DisableDebugEvents }}" readonly></li>
+                            <!-- Adicione mais mods aqui -->
+                        </ul>
+                    </div>
                 </div>
-                <div class="mod-category">
-                    <h3>Seguranças</h3>
-                    <ul>
-                        <li>Senha: 
-                            <input type="password" name="password" class="password-input" id="password-input">
-                        </li>
-                        <li>Segurança: <button class="toggle-btn off" onclick="toggleButton(this)">OFF</button></li>
-                        <li>Server Aparece na lista da Steam: <button class="toggle-btn off" onclick="toggleButton(this)">OFF</button></li>
-                        <li>Server Aparece na lista da EOS: <button class="toggle-btn off" onclick="toggleButton(this)">OFF</button></li>
-                        <!-- Adicione mais mods aqui -->
-                    </ul>
-                </div>
-                <div class="mod-category">
-                    <h3>Configurações de Save</h3>
-                    <ul>
-                        <li>AutoSaveCount: 
-                            <div class="range-container">
-                                <input type="range" min="10" max="99" value="50" oninput="updateRangeValue('Auto-Save-Count',this.value)">
-                                <span id="Auto-Save-Count">000</span>
-                            </div>
-                        </li>
-                        <li>AutoSaveInterval: 
-                            <div class="range-container">
-                                <input type="range" min="100" max="999" value="100" oninput="updateRangeValue('Auto-Save-Interval',this.value)">
-                                <span id="Auto-Save-Interval">000</span>
-                            </div>
-                        </li>
-                        <li>CompressSaveFiles: <button class="toggle-btn off" onclick="toggleButton(this)">OFF</button></li>
-                        <!-- Adicione mais mods aqui -->
-                    </ul>
-                </div>
-                <div class="mod-category">
-                    <h3>Configurações de debug events</h3>
-                    <ul>
-                        <li>Apenas ADM para Debug Event: <button class="toggle-btn off" onclick="toggleButton(this)">OFF</button></li>
-                        <li>Disativar Debug Event: <button class="toggle-btn off" onclick="toggleButton(this)">OFF</button></li>
-                        <!-- Adicione mais mods aqui -->
-                    </ul>
-                </div>
-            </div>
+                <button class="save-btn pro" type="submit">Salvar</button>
+            </form>
         </section>
         <aside id="sidebar">
-            <button class="save-btn pro">Salvar mods</button>
-            <button class="play-btn">Jogar</button>
             <div class="game-info">
                 <p>14,6 mil membros jogam isso</p>
                 <p>Última atualização em 08/12/2023</p>
-                <button>Criar atalho na área de trabalho</button>
             </div>
         </aside>
     </main>
-    <script src="static/scripts.js"></script>
+    <script src="static/scripts.js">
+        document.addEventListener('DOMContentLoaded', function() {
+            // Função a ser executada quando a página é carregada
+            // Obtém todos os botões com a classe 'toggle-btn'
+            var toggleButtons = document.querySelectorAll('.toggle-btn');
+        
+        toggleButtons.forEach(function(button) {
+            if (button.textContent == 'False') {
+                button.classList.remove('off');
+                button.classList.add('on');
+                button.textContent = 'True';
+                button.value='True';
+            } else {
+                button.classList.remove('on');
+                button.classList.add('off');
+                button.textContent = 'False';
+                button.value='False';
+            }
+        });
+           
+        });
+    </script>
 </body>
 </html>
