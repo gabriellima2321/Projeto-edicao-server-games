@@ -1,4 +1,4 @@
-{
+﻿{
   "Name": "[BR]TheFamilyGuy",
   "Description": "Este servidor e dedicado a amigos de longa data. ",
   "Port": 9876,
@@ -10,14 +10,14 @@
   "Password": "biri1313",
   "Secure": true,
   "ListOnSteam": true,
-  "ListOnEOS": true,
+  "ListOnEOS": false,
   "AutoSaveCount": 20,
   "AutoSaveInterval": 120,
   "CompressSaveFiles": true,
   "GameSettingsPreset": "",
   "GameDifficultyPreset": "",
   "AdminOnlyDebugEvents": true,
-  "DisableDebugEvents": true,
+  "DisableDebugEvents": false,
   "API": {
     "Enabled": false
   },

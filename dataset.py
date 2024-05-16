@@ -2,8 +2,10 @@ import json
 import os
 
 class LeitorJSON:
-    def __init__(self, caminho_arquivo):
-        self.caminho_arquivo = caminho_arquivo
+    caminho_vrising=f"""{str(os.getenv('VRISING_JSON_LOCATE'))}"""
+
+    def __init__(self):
+        self.caminho_arquivo = self.caminho_vrising
         self.dados = self._carregar_json()
 
     def _carregar_json(self):
@@ -20,3 +22,9 @@ if __name__ == "__main__":
         caminho_arquivo_json = os.path.join(os.path.dirname(__file__), 'dados.json')
         leitor = LeitorJSON(caminho_arquivo_json)
         print(leitor.obter_dado('nome'))  # Deve imprimir 'João'
+
+def geraJSON(dado):
+     caminho_diretorio=f"""{str(os.getenv('VRISING_GERAR_JSON_LOCATE'))}"""
+     caminho_arquivo = os.path.join(caminho_diretorio,'ServerHostSettings.json')
+     with open(caminho_arquivo, 'w') as arquivo_json:
+        json.dump(dado, arquivo_json, indent=2)

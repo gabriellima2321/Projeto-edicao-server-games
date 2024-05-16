@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Modifications</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <header>
+        <div id="header-content">
+            <input type="text" placeholder="Pesquisar jogos">
+            <nav>
+                <a href="{{ url_for('index') }}">Início</a>
+                <a href="#">Meus jogos</a>
+                <a href="#">Explorar</a>
+                <a href="#">Criadores</a>
+            </nav>
+            <div id="user-info">
+                <span class="username">{{ usuario }}</span>
+                <button class="pro">Apoiar B2</button>
+                <a href="{{ url_for('logout')}}"><button class="support">Logout</button></a>
+                <img src="" alt="Settings" class="settings-icon">
+            </div>
+        </div>
+    </header>
+    <main>
+        <section id="game-details">
+            <div class="img-container">
+                <img class="img-fluid" src="https://products.eneba.games/resized-products/Dc0zE3X7rqARs4WeZ2M-41tarTbr7uGRYc1kVbwsI8U_350x200_1x-0.jpg" width="200" height="300">
+                <div class="hidden-menu">
+                    <a href="{{ url_for('v_rising_server_edit') }}"><button class="edit-btn">Editar Servidor</button></a>
+                    <button class="edit-btn">Editar Game</button>
+                </div>
+            </div>
+        </section>
+        <aside id="sidebar">
+            <div class="game-info">
+            </div>
+        </aside>
+    </main>
+    <script src="static/scripts.js">
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Modifications</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <header>
+        <div id="header-content">
+            <input type="text" placeholder="Pesquisar jogos">
+            <nav>
+                <a href="{{ url_for('index') }}">Início</a>
+                <a href="{{ url_for('meus_jogos') }}">Meus jogos</a>
+                <a href="#">Explorar</a>
+                <a href="#">Criadores</a>
+            </nav>
+            <div id="user-info">
+                <span class="username">{{ usuario }}</span>
+                <button class="pro">Apoiar B2</button>
+                <a href="{{ url_for('logout')}}"><button class="support">Logout</button></a>
+                <img src="settings-icon.png" alt="Settings" class="settings-icon">
+            </div>
+        </div>
+    </header>
+    <main>
+        <section id="game-details">
+        </section>
+        <aside id="sidebar">
+            <div class="game-info">
+            </div>
+        </aside>
+    </main>
+    <script src="static/scripts.js">
+    </script>
+</body>
+</html>
