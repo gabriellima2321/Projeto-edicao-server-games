@@ -9,12 +9,8 @@ arquivo_vrising_game='ServerGameSettings.json'
 class LeitorJSON:
     caminho_vrising_server=f"""{str(os.getenv('ENTRADA_JSON_LOCATE'))}"""+arquivo_vrising_server
     caminho_vrising_game=f"""{str(os.getenv('ENTRADA_JSON_LOCATE'))}"""+arquivo_vrising_game
-    print(caminho_vrising_server)
-    print(caminho_vrising_game)
 
     def __init__(self,game=None,type=None):
-        print(type)
-        print(game)
         self.caminho_arquivo =''
         if (game=='vrising' and type=='server'):
             self.caminho_arquivo = self.caminho_vrising_server
