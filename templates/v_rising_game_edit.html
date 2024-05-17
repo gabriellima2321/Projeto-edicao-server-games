@@ -26,18 +26,58 @@
     </header>
     <main>
         <section id="game-details">
-            <h2>V Rising - Server edit</h2>
+            <h2>V Rising - Gamer edit</h2>
             <div class="platforms">
                 <span>Steam</span>
                 <span>Xbox</span>
                 <span>Epic</span>
             </div>
-            <form action="{{ url_for('atualiza_v_rising_server_edit') }}" method="post">
+            <form>
                 <div id="mods-section">
                     <div class="mod-category">
-                        <h3>Configurações de Servidor</h3>
+                        <h3>Configurações de Jogo</h3>
                         <ul>
-                            <li>Nome: <input type="text" name="nome" class="nome-input" id="nome-input" required value="{{ info.Name }}"></li>
+                            <li>Dificuldade de jogo: 
+                                <select id="dificuldade-game" name="dificuldade-game" class="dropdown-menu">
+                                    <option value="Easy" {% if info.GameDifficulty == "Easy" %}selected{% endif %}>Fácil</option>
+                                    <option value="Normal" {% if info.GameDifficulty == "Normal" %}selected{% endif %}>Normal</option>
+                                    <option value="Hard" {% if info.GameDifficulty == "Hard" %}selected{% endif %}>Dificil</option>
+                                </select>
+                            </li>
+                            <li>Tipo de jogo:
+                                <select id="game-mode-type" name="game-mode-type" class="dropdown-menu">
+                                    <option value="PvE" {% if info.GameModeType == "PvE" %}selected{% endif %}>PvE</option>
+                                    <option value="PvP" {% if info.GameModeType == "PvP" %}selected{% endif %}>PvP</option>
+                                </select>
+                            </li>
+                            <li>Dano ao castelo:
+                                <select id="castle-damage-mode" name="castle-damage-mode" class="dropdown-menu">
+                                    <option value="Always" {% if info.CastleDamageMode == "Always" %}selected{% endif %}>Sempre</option>
+                                    <option value="Never" {% if info.CastleDamageMode == "Never" %}selected{% endif %}>Nunca</option>
+                                    <option value="TimeRestricted" {% if info.CastleDamageMode == "TimeRestricted" %}selected{% endif %}>Tempo Restrito</option>
+                                </select>
+                            </li>
+                            <li>Dano a jogador:
+                                <select id="player-damage-mode" name="player-damage-mode" class="dropdown-menu">
+                                    <option value="Always" {% if info.PlayerDamageMode == "Always" %}selected{% endif %}>Sempre</option>
+                                    <option value="TimeRestricted" {% if info.PlayerDamageMode == "TimeRestricted" %}selected{% endif %}>Tempo Restrito</option>
+                                </select>
+                            </li>
+                            <li>Como o castelo pode ser destruido:
+                                <select id="castle-heart-damage-mode" name="castle-heart-damage-mode" class="dropdown-menu">
+                                    <option value="CanBeDestroyedOnlyWhenDecaying" {% if info.CastleHeartDamageMode == "CanBeDestroyedOnlyWhenDecaying" %}selected{% endif %}>Por Tempo</option>
+                                    <option value="CanBeDestroyedByPlayers" {% if info.CastleHeartDamageMode == "CanBeDestroyedByPlayers" %}selected{% endif %}>Por Players</option>
+                                    <option value="CanBeSeizedOrDestroyedByPlayers" {% if info.CastleHeartDamageMode == "CanBeSeizedOrDestroyedByPlayers" %}selected{% endif %}>Aprendido ou Destruido</option>
+                                </select>
+                            </li>
+                            <li>Quem pode saquear seus itens após a morte:
+                                <select id="death-container-permission" name="death-container-permission" class="dropdown-menu">
+                                    <option value="Anyone" {% if info.CastleHeartDamageMode == "Anyone" %}selected{% endif %}>Qualquer</option>
+                                    <option value="ClanMembers" {% if info.CastleHeartDamageMode == "ClanMembers" %}selected{% endif %}>Mebros do Clã</option>
+                                    
+                                </select>
+                            </li>
+                            <!--
                             <li>Descrição: <input type="text" name="descricao" class="descricao-input" id="descricao-input" value="{{ info.Description }}"></li>
                             <li>Numero Maximo de Players: 
                                 <div class="number-input">
@@ -61,6 +101,7 @@
                                 </div>
                             </li>
                             <li>Save Name:  <input type="text" name="save-nome" class="save-nome-input" id="save-nome-input" value="{{ info.SaveName }}"></li>
+                        -->
                             <!-- Adicione mais mods aqui -->
                         </ul>
                     </div>

@@ -256,3 +256,15 @@ input[type="password"] {
     background-color: #00bfff;
     color: white;
 }
+
+.dropdown-menu{
+    width: 200px;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 20px;
+    text-align: center;
+    font-weight: bolder;
+    font-display:20px;
+    font-size:15px;
+
+}

@@ -70,7 +70,7 @@ def v_rising_server_edit(): #Pagina de login
     #autentica usuario conforme a base de dados.
     auth = authenticate(session['user'],session['password'])
     if auth:
-        leitor=LeitorJSON()
+        leitor=LeitorJSON('vrising','server')
         dados = leitor.obter_dado()
         return render_template('v_rising_server_edit.html', usuario=session['user'] ,info=dados)
     else:
@@ -118,5 +118,22 @@ def atualiza_v_rising_server_edit():
         "Rcon": {"Enabled":False,"Port": 25575,"Password": "biribiri1313"}
     }
 
-    geraJSON(dados)
+    geraJSON(dados,'vrising','server')
     return redirect(url_for('meus_jogos')) 
+
+
+@app.route('/v_rising_game_edit')
+def v_rising_game_edit(): #Pagina de login
+    #Inicia sessao colocando usuario e senha
+    if 'user' not in session:
+        session['user'] = ''
+        session['password'] = ''
+
+    #autentica usuario conforme a base de dados.
+    auth = authenticate(session['user'],session['password'])
+    if auth:
+        leitor=LeitorJSON('vrising','game')
+        dados = leitor.obter_dado()
+        return render_template('v_rising_game_edit.html', usuario=session['user'] ,info=dados)
+    else:
+        return redirect(url_for('login'))
