@@ -32,3 +32,20 @@ class Jogos(db.Model):
     nome = db.Column(db.String, nullable=False)
     categoria = db.Column(db.String, nullable=False)
     console = db.Column(db.String, nullable=False)
+
+class FormularioTemplate(db.Model):
+    __tablename__ = 'formulario_template'
+    form_user = db.Column(db.String(500))
+    form_type = db.Column(db.String(50), nullable=False)
+    form_id = db.Column(db.String(255), nullable=False, primary_key=True)
+    form_name = db.Column(db.String(255), nullable=False)
+    form_class = db.Column(db.String(255), nullable=True)
+    form_descript = db.Column(db.String(255), nullable=True)
+    form_value = db.Column(db.String(255), nullable=True)
+    form_onclick = db.Column(db.String(255), nullable=True)
+    form_python = db.Column(db.String(1000), nullable=True)
+    form_end = db.Column(db.String(255), nullable=False)
+    form_game = db.Column(db.String(255), nullable=False)
+    form_game_type = db.Column(db.String(255), nullable=False)
+
+class FormularioSelectTemplate

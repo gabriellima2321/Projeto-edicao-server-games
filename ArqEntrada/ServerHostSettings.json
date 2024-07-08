@@ -8,7 +8,7 @@
   "ServerFps": 60,
   "SaveName": "[BR]TheFamilyGuy",
   "Password": "biri1313",
-  "Secure": true,
+  "Secure": false,
   "ListOnSteam": true,
   "ListOnEOS": true,
   "AutoSaveCount": 20,

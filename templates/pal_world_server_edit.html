@@ -12,7 +12,7 @@
             <input type="text" placeholder="Pesquisar jogos">
             <nav>
                 <a href="{{ url_for('index') }}">Início</a>
-                <a href="#">Meus jogos</a>
+                <a href="{{ url_for('meus_jogos') }}">Meus jogos</a>
                 <a href="#">Explorar</a>
                 <a href="#">Criadores</a>
             </nav>
@@ -20,26 +20,37 @@
                 <span class="username">{{ usuario }}</span>
                 <button class="pro">Apoiar B2</button>
                 <a href="{{ url_for('logout')}}"><button class="support">Logout</button></a>
-                <img src="" alt="Settings" class="settings-icon">
+                <img src="settings-icon.png" alt="Settings" class="settings-icon">
             </div>
         </div>
     </header>
     <main>
         <section id="game-details">
-            <div class="img-container">
-                <img class="img-fluid" src="https://products.eneba.games/resized-products/Dc0zE3X7rqARs4WeZ2M-41tarTbr7uGRYc1kVbwsI8U_350x200_1x-0.jpg" width="200" height="300">
-                <div class="hidden-menu">
-                    <a href="{{ url_for('v_rising_server_edit') }}"><button class="edit-btn">Editar Servidor</button></a>
-                    <a href="{{ url_for('v_rising_game_edit') }}"><button class="edit-btn">Editar Game</button></a>
-                </div>
+            <h2>V Rising - Server edit</h2>
+            <div class="platforms">
+                <span>Steam</span>
+                <span>Xbox</span>
+                <span>Epic</span>
             </div>
-            <div class="img-container">
-                <img class="img-fluid" src="https://m.media-amazon.com/images/M/MV5BZWNhOGVmOTQtYThkNC00Nzc2LTg3M2ItNjVlMTEzNTJmZTNiXkEyXkFqcGdeQXVyMTk2OTAzNTI@._V1_FMjpg_UX1000_.jpg" width="200" height="300">
-                <div class="hidden-menu">
-                    <a href="{{ url_for('pal_world_server_edit') }}"><button class="edit-btn">Editar Servidor</button></a>
-                    <a href="{{ url_for('v_rising_game_edit') }}"><button class="edit-btn">Editar Game</button></a>
+            <form>
+                <div id="mods-section">
+                    <div class="mod-category">
+                        {% for key,value in items.items()%}
+                            {{ value|safe }}
+                        {% endfor %}
+                    </div>
+                    <div class="mod-category">
+                        <h3>Seguranças</h3>
+                    </div>
+                    <div class="mod-category">
+                        <h3>Configurações de Save</h3>
+                    </div>
+                    <div class="mod-category">
+                        <h3>Configurações de debug events</h3>
+                    </div>
                 </div>
-            </div>
+                <input class="save-btn pro" type="submit" value="Salvar">
+            </form>
         </section>
         <aside id="sidebar">
             <div class="game-info">
@@ -58,6 +69,26 @@
         </aside>
     </main>
     <script src="static/scripts.js">
+        document.addEventListener('DOMContentLoaded', function() {
+            // Função a ser executada quando a página é carregada
+            // Obtém todos os botões com a classe 'toggle-btn'
+            var toggleButtons = document.querySelectorAll('.toggle-btn');
+        
+        toggleButtons.forEach(function(button) {
+            if (button.textContent == 'False') {
+                button.classList.remove('off');
+                button.classList.add('on');
+                button.textContent = 'True';
+                button.value='True';
+            } else {
+                button.classList.remove('on');
+                button.classList.add('off');
+                button.textContent = 'False';
+                button.value='False';
+            }
+        });
+           
+        });
     </script>
 </body>
 </html>

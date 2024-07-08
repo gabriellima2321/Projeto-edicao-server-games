@@ -240,6 +240,7 @@ input[type="password"] {
 .img-container {
     position: relative;
     display: inline-block;
+    padding: 10px;
 }
 .img-container:hover .hidden-menu {
     opacity: 1;
@@ -267,4 +268,27 @@ input[type="password"] {
     font-display:20px;
     font-size:15px;
 
+}
+
+.status-container {
+    display: flex;
+    align-items: center;
+}
+
+.status-circle.off {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display:block;
+    background-color: red; /* Inicialmente vermelho */
+    margin-right: 20px;
+}
+
+.status-circle.on {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display:block;
+    background-color: green; /* Inicialmente vermelho */
+    margin-right: 20px;
 }

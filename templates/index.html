@@ -29,6 +29,17 @@
         </section>
         <aside id="sidebar">
             <div class="game-info">
+                <h3>Status dos servidores</h3>
+                <div class="status-container">
+                    <div id="server-status" {% if serverstatusvrising.vrising == True %}  class="status-circle on" {% else %} class="status-circle off" {% endif %}>
+                    </div>
+                    <p id="status-text">V Rising server - {% if serverstatusvrising.vrising == True %} ON {% else %} OFF {% endif %}</p>
+                </div>
+                <div class="status-container">
+                    <div id="server-status" {% if serverstatusvrising.palword == True %}  class="status-circle on" {% else %} class="status-circle off" {% endif %}>
+                    </div>
+                    <p id="status-text">Pal World server - {% if serverstatusvrising.palword == True %} ON {% else %} OFF {% endif %}</p>
+                </div>
             </div>
         </aside>
     </main>

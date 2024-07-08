@@ -1,13 +1,18 @@
 from flask import Flask, render_template, request, redirect, flash, url_for, send_from_directory,session
 from authenticator import authenticate,inst_infuser
 from db_connection import app,Jogos,upload_dir,app
+from db_formulario import creat_form_line
 from dataset import LeitorJSON,geraJSON
 from dotenv import load_dotenv
 import os
+from win_process import is_process_running
+from markupsafe import Markup
 
 load_dotenv()
 
 caminho=f"""{str(os.getenv('VRISING_JSON_LOCATE'))}"""
+v_rising_server_exe="VRising.exe"
+pal_word_server_exe="palworld.exe"
 
 @app.route('/')
 def index():  # put application's code here
@@ -19,7 +24,11 @@ def index():  # put application's code here
     #autentica usuario conforme a base de dados.
     auth = authenticate(session['user'],session['password'])
     if auth:
-        return render_template('index.html',usuario=session['user'])
+        status_server={
+            'vrising': is_process_running(v_rising_server_exe),
+            'palword': is_process_running(pal_word_server_exe)
+        }
+        return render_template('index.html',usuario=session['user'], serverstatusvrising=status_server )
     else:
         return redirect(url_for('login'))
 
@@ -55,7 +64,12 @@ def meus_jogos():  # put application's code here
     #autentica usuario conforme a base de dados.
     auth = authenticate(session['user'],session['password'])
     if auth:
-        return render_template('meus_jogos.html',usuario=session['user'])
+        status_server={
+            'vrising': is_process_running(v_rising_server_exe),
+            'palword': is_process_running(pal_word_server_exe)
+        }
+
+        return render_template('meus_jogos.html',usuario=session['user'],serverstatusvrising=status_server)
     else:
         return redirect(url_for('login'))
 
@@ -72,7 +86,11 @@ def v_rising_server_edit(): #Pagina de login
     if auth:
         leitor=LeitorJSON('vrising','server')
         dados = leitor.obter_dado()
-        return render_template('v_rising_server_edit.html', usuario=session['user'] ,info=dados)
+        status_server={
+            'vrising': is_process_running(v_rising_server_exe),
+            'palword': is_process_running(pal_word_server_exe)
+        }
+        return render_template('v_rising_server_edit.html', usuario=session['user'] ,info=dados, serverstatusvrising=status_server)
     else:
         return redirect(url_for('login'))
 
@@ -134,6 +152,36 @@ def v_rising_game_edit(): #Pagina de login
     if auth:
         leitor=LeitorJSON('vrising','game')
         dados = leitor.obter_dado()
-        return render_template('v_rising_game_edit.html', usuario=session['user'] ,info=dados)
+        status_server={
+            'vrising': is_process_running(v_rising_server_exe),
+            'palword': is_process_running(pal_word_server_exe)
+        }
+        return render_template('v_rising_game_edit.html', usuario=session['user'] ,info=dados, serverstatusvrising=status_server)
+    else:
+        return redirect(url_for('login'))
+
+
+@app.route('/pal_world_server_edit')
+def pal_world_server_edit(): #Pagina de login
+    #Inicia sessao colocando usuario e senha
+    if 'user' not in session:
+        session['user'] = ''
+        session['password'] = ''
+
+    #autentica usuario conforme a base de dados.
+    auth = authenticate(session['user'],session['password'])
+    if auth:
+        items = creat_form_line(session['user'],'v_rising','game')
+        # items={
+        #     'li':Markup('<li>Tipo de jogo:</li>'),
+        #     'h3':Markup('<li>Tipo de jogo:</li>')
+        #     }
+        leitor=LeitorJSON('vrising','server')
+        dados = leitor.obter_dado()
+        status_server={
+            'vrising': is_process_running(v_rising_server_exe),
+            'palword': is_process_running(pal_word_server_exe)
+        }
+        return render_template('pal_world_server_edit.html', usuario=session['user'] ,info=dados, serverstatusvrising=status_server, items=items)
     else:
         return redirect(url_for('login'))

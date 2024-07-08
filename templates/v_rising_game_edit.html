@@ -72,76 +72,163 @@
                             </li>
                             <li>Quem pode saquear seus itens após a morte:
                                 <select id="death-container-permission" name="death-container-permission" class="dropdown-menu">
-                                    <option value="Anyone" {% if info.CastleHeartDamageMode == "Anyone" %}selected{% endif %}>Qualquer</option>
-                                    <option value="ClanMembers" {% if info.CastleHeartDamageMode == "ClanMembers" %}selected{% endif %}>Mebros do Clã</option>
-                                    
+                                    <option value="Anyone" {% if info.DeathContainerPermission == "Anyone" %}selected{% endif %}>Qualquer</option>
+                                    <option value="ClanMembers" {% if info.DeathContainerPermission == "ClanMembers" %}selected{% endif %}>Mebros do Clã</option>
                                 </select>
                             </li>
-                            <!--
-                            <li>Descrição: <input type="text" name="descricao" class="descricao-input" id="descricao-input" value="{{ info.Description }}"></li>
-                            <li>Numero Maximo de Players: 
+                            <li>Pode saquear baús de outros jogadores:
+                                <input {% if info.CanLootEnemyContainers == True %} class="toggle-btn on" {% else %} class="toggle-btn off" {% endif %} name="Can-Loot-Enemy-Containers" onclick="toggleButton(this)" value="{{ info.CanLootEnemyContainers }}" readonly>
+                            </li>
+                            <li>Mantém itens ao morrer:
+                                <input {% if info.BloodBoundEquipment == True %} class="toggle-btn on" {% else %} class="toggle-btn off" {% endif %} name="Blood-Bound-Equipment" onclick="toggleButton(this)" value="{{ info.BloodBoundEquipment }}" readonly>
+                            </li>
+                            <li>Permite teleport com itens:
+                                <input {% if info.TeleportBoundItems == True %} class="toggle-btn on" {% else %} class="toggle-btn off" {% endif %} name="Teleport-Bound-Items" onclick="toggleButton(this)" value="{{ info.TeleportBoundItems }}" readonly>
+                            </li>
+                            <li>Permite chat global:
+                                <input {% if info.AllowGlobalChat == True %} class="toggle-btn on" {% else %} class="toggle-btn off" {% endif %} name="Allow-Global-Chat" onclick="toggleButton(this)" value="{{ info.AllowGlobalChat }}" readonly>
+                            </li>
+                            <li>Todos os pontos de referências desbloqueados:
+                                <input {% if info.AllWaypointsUnlocked == True %} class="toggle-btn on" {% else %} class="toggle-btn off" {% endif %} name="All-Way-points-Unlocked" onclick="toggleButton(this)" value="{{ info.AllWaypointsUnlocked }}" readonly>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mod-category">
+                        <h3>Personagem</h3>
+                        <ul>
+                            <li>Tamanho das pilhas do inventário: 
+                                <div class="range-container">
+                                    <input  type="range" min="0.1" max="3" step="0.1" value="{{ info.InventoryStacksModifier }}" oninput="updateRangeValue('Inventory-Stacks-Modifier',this.value)" name="Inventory-Stacks-Modifier">
+                                    <span id="Inventory-Stacks-Modifier">{{ info.InventoryStacksModifier }}</span>
+                                </div>
+                            </li>
+                            <li>Drop de inimigos: 
+                                <div class="range-container">
+                                    <input  type="range" min="0.1" max="3" step="0.1" value="{{ info.DropTableModifier_General }}" oninput="updateRangeValue('Drop-Table-Modifier_General',this.value)" name="Drop-Table-Modifier_General">
+                                    <span id="Drop-Table-Modifier_General">{{ info.DropTableModifier_General }}</span>
+                                </div>
+                            </li>
+                            <li>Drop de missões: 
+                                <div class="range-container">
+                                    <input  type="range" min="0.1" max="3" step="0.1" value="{{ info.DropTableModifier_Missions }}" oninput="updateRangeValue('Drop-Table-Modifier_Missions',this.value)" name="Drop-Table-Modifier_Missions">
+                                    <span id="Drop-Table-Modifier_Missions">{{ info.DropTableModifier_Missions }}</span>
+                                </div>
+                            </li>
+                            <li>Drop de novos recursos: 
+                                <div class="range-container">
+                                    <input  type="range" min="0.1" max="3" step="0.1" value="{{ info.MaterialYieldModifier_Global }}" oninput="updateRangeValue('Material-Yield-Modifier_Global',this.value)" name="Material-Yield-Modifier_Global">
+                                    <span id="Material-Yield-Modifier_Global">{{ info.MaterialYieldModifier_Global }}</span>
+                                </div>
+                            </li>
+                            <li>Multiplicados de sangue obtido de inimigos: 
+                                <div class="range-container">
+                                    <input  type="range" min="0.1" max="3" step="0.1" value="{{ info.BloodEssenceYieldModifier }}" oninput="updateRangeValue('Blood-Essence-Yield-Modifier',this.value)" name="Blood-Essence-Yield-Modifier">
+                                    <span id="Blood-Essence-Yield-Modifier">{{ info.BloodEssenceYieldModifier }}</span>
+                                </div>
+                            </li>
+                            <li>Tamanho do clã: 
                                 <div class="number-input">
-                                    <input class="toggle-btn plus" onclick="decreaseValue('number-field-players',0)" value="-" readonly>
-                                    <input type="text" name="number-max-players" id="number-field-players" value="{{ info.MaxConnectedUsers }}" max="15" readonly>
-                                    <input class="toggle-btn plus" onclick="increaseValue('number-field-players',15)" value="+" readonly>
+                                    <input class="toggle-btn plus" onclick="decreaseValue('Clan-Size',4)" value="-" readonly>
+                                    <input type="text" name="Clan-Size" id="Clan-Size" value="{{ info.ClanSize }}" max="10" readonly>
+                                    <input class="toggle-btn plus" onclick="increaseValue('Clan-Size',10)" value="+" readonly>
                                 </div>
                             </li>
-                            <li>Numero Maximo de ADM: 
-                                <div class="number-input">
-                                    <input class="toggle-btn plus" onclick="decreaseValue('number-field-adm',0)" value="-" readonly>
-                                    <input type="text" name="number-max-adm" id="number-field-adm" value="{{ info.MaxConnectedAdmins }}" max="6" readonly>
-                                    <input class="toggle-btn plus" onclick="increaseValue('number-field-adm',6)" value="+" readonly>
-                                </div>
-                            </li>
-                            <li>
-                                FPS do servidor:  
+                            <li>Força das áreas de alho: 
                                 <div class="range-container">
-                                    <input type="range" min="10" max="99" value="{{ info.ServerFps }}" name="fps-server-tax" id="fps-server-tax" oninput="updateRangeValue('fps-server-value',this.value)">
-                                    <span id="fps-server-value">{{ info.ServerFps }}</span>
+                                    <input  type="range" min="0.1" max="3.0" step="0.1" value="{{ info.GarlicAreaStrengthModifier }}" oninput="updateRangeValue('Garlic-Area-Strength-Modifier',this.value)" name="Garlic-Area-Strength-Modifier">
+                                    <span id="Garlic-Area-Strength-Modifier">{{ info.GarlicAreaStrengthModifier }}</span>
                                 </div>
                             </li>
-                            <li>Save Name:  <input type="text" name="save-nome" class="save-nome-input" id="save-nome-input" value="{{ info.SaveName }}"></li>
-                        -->
-                            <!-- Adicione mais mods aqui -->
+                            <li>Força das áreas sagradas: 
+                                <div class="range-container">
+                                    <input  type="range" min="0.1" max="3.0" step="0.1" value="{{ info.HolyAreaStrengthModifier }}" oninput="updateRangeValue('Holy-Area-Strength-Modifier',this.value)" name="Holy-Area-Strength-Modifier">
+                                    <span id="Holy-Area-Strength-Modifier">{{ info.HolyAreaStrengthModifier }}</span>
+                                </div>
+                            </li>
+                            <li>Dano por carregar Prata: 
+                                <div class="range-container">
+                                    <input  type="range" min="0.1" max="3.0" step="0.1" value="{{ info.SilverStrengthModifier }}" oninput="updateRangeValue('Silver-Strength-Modifier',this.value)" name="Silver-Strength-Modifier">
+                                    <span id="Silver-Strength-Modifier">{{ info.SilverStrengthModifier }}</span>
+                                </div>
+                            </li>
+                            <li>Dano do Sol: 
+                                <div class="range-container">
+                                    <input  type="range" min="0.1" max="3.0" step="0.1" value="{{ info.SunDamageModifier }}" oninput="updateRangeValue('Sun-Damage-Modifier',this.value)" name="Sun-Damage-Modifier">
+                                    <span id="Sun-Damage-Modifier">{{ info.SunDamageModifier }}</span>
+                                </div>
+                            </li>
+                            <li>Consulmo de essência sanguinea do castelo: 
+                                <div class="range-container">
+                                    <input  type="range" min="0.1" max="3.0" step="0.1" value="{{ info.CastleBloodEssenceDrainModifier }}" oninput="updateRangeValue('Castle-Blood-Essence-Drain-Modifier',this.value)" name="Castle-Blood-Essence-Drain-Modifier">
+                                    <span id="Castle-Blood-Essence-Drain-Modifier">{{ info.CastleBloodEssenceDrainModifier }}</span>
+                                </div>
+                            </li>
+                            <li>Custo de construção: 
+                                <div class="range-container">
+                                    <input  type="range" min="0.1" max="3.0" step="0.1" value="{{ info.BuildCostModifier }}" oninput="updateRangeValue('Build-Cost-Modifier',this.value)" name="Build-Cost-Modifier">
+                                    <span id="Build-Cost-Modifier">{{ info.BuildCostModifier }}</span>
+                                </div>
+                            </li>
+                            <li>Custo de modificação: 
+                                <div class="range-container">
+                                    <input  type="range" min="0.1" max="3.0" step="0.1" value="{{ info.RecipeCostModifier }}" oninput="updateRangeValue('Recipe-Cost-Modifier',this.value)" name="Recipe-Cost-Modifier">
+                                    <span id="Recipe-Cost-Modifier">{{ info.RecipeCostModifier }}</span>
+                                </div>
+                            </li>
+                            <li>Custo de pesquisa: 
+                                <div class="range-container">
+                                    <input  type="range" min="0.1" max="3.0" step="0.1" value="{{ info.ResearchCostModifier }}" oninput="updateRangeValue('Research-Cost-Modifier',this.value)" name="Research-Cost-Modifier">
+                                    <span id="Research-Cost-Modifier">{{ info.ResearchCostModifier }}</span>
+                                </div>
+                            </li>
+                            <li>Custo de refinamento: 
+                                <div class="range-container">
+                                    <input  type="range" min="0.1" max="3.0" step="0.1" value="{{ info.RefinementCostModifier }}" oninput="updateRangeValue('Refinement-Cost-Modifier',this.value)" name="Refinement-Cost-Modifier">
+                                    <span id="Refinement-Cost-Modifier">{{ info.RefinementCostModifier }}</span>
+                                </div>
+                            </li>
+                            <li>Velocidade de refinamento: 
+                                <div class="range-container">
+                                    <input  type="range" min="0.1" max="3.0" step="0.1" value="{{ info.RefinementRateModifier }}" oninput="updateRangeValue('Refinement-Rate-Modifier',this.value)" name="Refinement-Rate-Modifier">
+                                    <span id="Refinement-Rate-Modifier">{{ info.RefinementRateModifier }}</span>
+                                </div>
+                            </li>
+                            <li>Velocidade do tempo de pesquisa: 
+                                <div class="range-container">
+                                    <input  type="range" min="0.1" max="3.0" step="0.1" value="{{ info.ResearchTimeModifier }}" oninput="updateRangeValue('Research-Time-Modifier',this.value)" name="Research-Time-Modifier">
+                                    <span id="Research-Time-Modifier">{{ info.ResearchTimeModifier }}</span>
+                                </div>
+                            </li>
+                            <li>Recursos recuperados ao desmontar edificios: 
+                                <div class="range-container">
+                                    <input  type="range" min="0.1" max="1.0" step="0.1" value="{{ info.DismantleResourceModifier }}" oninput="updateRangeValue('Dismantle-Resource-Modifier',this.value)" name="Dismantle-Resource-Modifier">
+                                    <span id="Dismantle-Resource-Modifier">{{ info.DismantleResourceModifier }}</span>
+                                </div>
+                            </li>
+                            <li>Tempo necessário para converter um servo: 
+                                <div class="range-container">
+                                    <input  type="range" min="0.1" max="1.0" step="0.1" value="{{ info.ServantConvertRateModifier }}" oninput="updateRangeValue('Servant-Convert-Rate-Modifier',this.value)" name="Servant-Convert-Rate-Modifier">
+                                    <span id="Servant-Convert-Rate-Modifier">{{ info.ServantConvertRateModifier }}</span>
+                                </div>
+                            </li>
+                            <li>Custo de reparo: 
+                                <div class="range-container">
+                                    <input  type="range" min="0.1" max="1.0" step="0.1" value="{{ info.RepairCostModifier }}" oninput="updateRangeValue('Repair-Cost-Modifier',this.value)" name="Repair-Cost-Modifier">
+                                    <span id="Repair-Cost-Modifier">{{ info.RepairCostModifier }}</span>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                     <div class="mod-category">
-                        <h3>Seguranças</h3>
+                        <h3>Modificador de Tempo</h3>
                         <ul>
-                            <li>Senha: 
-                                <input type="text" name="password" class="password-input" id="password-input" value="{{ info.Password }}">
-                            </li>
-                            <li>Segurança: <input name="seguranca-ativa" class="toggle-btn netral" onclick="toggleButton(this)" value="{{ info.Secure }}" readonly></li>
-                            <li>Server Aparece na lista da Steam: <input name="listar-steam" class="toggle-btn netral" onclick="toggleButton(this)" value="{{ info.Secure }}" readonly></li>
-                            <li>Server Aparece na lista da EOS: <input name="listar-eos" class="toggle-btn netral" onclick="toggleButton(this)" value="{{ info.ListOnSteam }}" readonly></li>
-                            <!-- Adicione mais mods aqui -->
-                        </ul>
-                    </div>
-                    <div class="mod-category">
-                        <h3>Configurações de Save</h3>
-                        <ul>
-                            <li>AutoSaveCount: 
+                            <li>Duração do dia em segundos: 
                                 <div class="range-container">
-                                    <input type="range" min="10" max="99" value="{{ info.AutoSaveCount }}" oninput="updateRangeValue('Auto-Save-Count',this.value)" name="auto-save-count">
-                                    <span id="Auto-Save-Count">{{ info.AutoSaveCount }}</span>
+                                    <input  type="range" min="100" max="9999" step="1" value="{{ info.GameTimeModifiers.DayDurationInSeconds }}" oninput="updateRangeValue('Day-Duration-In-Seconds',this.value)" name="Day-Duration-In-Seconds">
+                                    <span id="Day-Duration-In-Seconds">{{ info.GameTimeModifiers.DayDurationInSeconds }}</span>
                                 </div>
                             </li>
-                            <li>AutoSaveInterval: 
-                                <div class="range-container">
-                                    <input type="range" min="100" max="999" value="{{ info.AutoSaveInterval }}" oninput="updateRangeValue('Auto-Save-Interval',this.value)" name="auto-save-interval">
-                                    <span id="Auto-Save-Interval">{{ info.AutoSaveInterval }}</span>
-                                </div>
-                            </li>
-                            <li>CompressSaveFiles:  <input name="compress-file" class="toggle-btn netral" onclick="toggleButton(this)" value="{{ info.CompressSaveFiles }}" readonly></li>
-                            <!-- Adicione mais mods aqui -->
-                        </ul>
-                    </div>
-                    <div class="mod-category">
-                        <h3>Configurações de debug events</h3>
-                        <ul>
-                            <li>Apenas ADM para Debug Event: <input name="adm-event-debug" class="toggle-btn netral" onclick="toggleButton(this)" value="{{ info.AdminOnlyDebugEvents }}" readonly></li>
-                            <li>Disativar Debug Event: <input name="debug-event" class="toggle-btn netral" onclick="toggleButton(this)" value="{{ info.DisableDebugEvents }}" readonly></li>
-                            <!-- Adicione mais mods aqui -->
                         </ul>
                     </div>
                 </div>
@@ -150,7 +237,17 @@
         </section>
         <aside id="sidebar">
             <div class="game-info">
-            
+                <h3>Status dos servidores</h3>
+                <div class="status-container">
+                    <div id="server-status" {% if serverstatusvrising.vrising == True %}  class="status-circle on" {% else %} class="status-circle off" {% endif %}>
+                    </div>
+                    <p id="status-text">V Rising server - {% if serverstatusvrising.vrising == True %} ON {% else %} OFF {% endif %}</p>
+                </div>
+                <div class="status-container">
+                    <div id="server-status" {% if serverstatusvrising.palword == True %}  class="status-circle on" {% else %} class="status-circle off" {% endif %}>
+                    </div>
+                    <p id="status-text">Pal World server - {% if serverstatusvrising.palword == True %} ON {% else %} OFF {% endif %}</p>
+                </div>
             </div>
         </aside>
     </main>

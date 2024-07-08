@@ -70,9 +70,9 @@
                             <li>Senha: 
                                 <input type="text" name="password" class="password-input" id="password-input" value="{{ info.Password }}">
                             </li>
-                            <li>Segurança: <input name="seguranca-ativa" class="toggle-btn netral" onclick="toggleButton(this)" value="{{ info.Secure }}" readonly></li>
-                            <li>Server Aparece na lista da Steam: <input name="listar-steam" class="toggle-btn netral" onclick="toggleButton(this)" value="{{ info.Secure }}" readonly></li>
-                            <li>Server Aparece na lista da EOS: <input name="listar-eos" class="toggle-btn netral" onclick="toggleButton(this)" value="{{ info.ListOnSteam }}" readonly></li>
+                            <li>Segurança: <input  {% if info.Secure == True %} class="toggle-btn on" {% else %} class="toggle-btn off" {% endif %} name="seguranca-ativa" onclick="toggleButton(this)" value="{{ info.Secure }}" readonly></li>
+                            <li>Server Aparece na lista da Steam: <input {% if info.ListOnSteam == True %} class="toggle-btn on" {% else %} class="toggle-btn off" {% endif %} name="listar-steam" onclick="toggleButton(this)" value="{{ info.ListOnSteam }}" readonly></li>
+                            <li>Server Aparece na lista da EOS: <input {% if info.ListOnEOS == True %} class="toggle-btn on" {% else %} class="toggle-btn off" {% endif %} name="listar-eos" onclick="toggleButton(this)" value="{{ info.ListOnEOS }}" readonly></li>
                             <!-- Adicione mais mods aqui -->
                         </ul>
                     </div>
@@ -91,15 +91,15 @@
                                     <span id="Auto-Save-Interval">{{ info.AutoSaveInterval }}</span>
                                 </div>
                             </li>
-                            <li>CompressSaveFiles:  <input name="compress-file" class="toggle-btn netral" onclick="toggleButton(this)" value="{{ info.CompressSaveFiles }}" readonly></li>
+                            <li>CompressSaveFiles:  <input {% if info.CompressSaveFiles == True %} class="toggle-btn on" {% else %} class="toggle-btn off" {% endif %} name="compress-file" onclick="toggleButton(this)" value="{{ info.CompressSaveFiles }}" readonly></li>
                             <!-- Adicione mais mods aqui -->
                         </ul>
                     </div>
                     <div class="mod-category">
                         <h3>Configurações de debug events</h3>
                         <ul>
-                            <li>Apenas ADM para Debug Event: <input name="adm-event-debug" class="toggle-btn netral" onclick="toggleButton(this)" value="{{ info.AdminOnlyDebugEvents }}" readonly></li>
-                            <li>Disativar Debug Event: <input name="debug-event" class="toggle-btn netral" onclick="toggleButton(this)" value="{{ info.DisableDebugEvents }}" readonly></li>
+                            <li>Apenas ADM para Debug Event: <input {% if info.AdminOnlyDebugEvents == True %} class="toggle-btn on" {% else %} class="toggle-btn off" {% endif %} name="adm-event-debug" onclick="toggleButton(this)" value="{{ info.AdminOnlyDebugEvents }}" readonly></li>
+                            <li>Disativar Debug Event: <input {% if info.DisableDebugEvents == True %} class="toggle-btn on" {% else %} class="toggle-btn off" {% endif %} name="debug-event" onclick="toggleButton(this)" value="{{ info.DisableDebugEvents }}" readonly></li>
                             <!-- Adicione mais mods aqui -->
                         </ul>
                     </div>
@@ -109,7 +109,17 @@
         </section>
         <aside id="sidebar">
             <div class="game-info">
-            
+                <h3>Status dos servidores</h3>
+                <div class="status-container">
+                    <div id="server-status" {% if serverstatusvrising.vrising == True %}  class="status-circle on" {% else %} class="status-circle off" {% endif %}>
+                    </div>
+                    <p id="status-text">V Rising server - {% if serverstatusvrising.vrising == True %} ON {% else %} OFF {% endif %}</p>
+                </div>
+                <div class="status-container">
+                    <div id="server-status" {% if serverstatusvrising.palword == True %}  class="status-circle on" {% else %} class="status-circle off" {% endif %}>
+                    </div>
+                    <p id="status-text">Pal World server - {% if serverstatusvrising.palword == True %} ON {% else %} OFF {% endif %}</p>
+                </div>
             </div>
         </aside>
     </main>
