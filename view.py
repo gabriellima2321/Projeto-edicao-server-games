@@ -171,11 +171,7 @@ def pal_world_server_edit(): #Pagina de login
     #autentica usuario conforme a base de dados.
     auth = authenticate(session['user'],session['password'])
     if auth:
-        items = creat_form_line(session['user'],'v_rising','game')
-        # items={
-        #     'li':Markup('<li>Tipo de jogo:</li>'),
-        #     'h3':Markup('<li>Tipo de jogo:</li>')
-        #     }
+        items = creat_form_line(session['user'],'vrising','game')
         leitor=LeitorJSON('vrising','server')
         dados = leitor.obter_dado()
         status_server={

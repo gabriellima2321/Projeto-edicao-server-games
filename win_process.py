@@ -12,10 +12,5 @@ def is_process_running(process_name):
     return False
 
 
-
-
-
-
-
 # Exemplo de uso
 process_name = "VRising.exe"

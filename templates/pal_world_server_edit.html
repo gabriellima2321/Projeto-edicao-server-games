@@ -35,9 +35,12 @@
             <form>
                 <div id="mods-section">
                     <div class="mod-category">
+                        <ul>
+                        <h3>Configurações de Jogo</h3>
                         {% for key,value in items.items()%}
                             {{ value|safe }}
                         {% endfor %}
+                        </ul>
                     </div>
                     <div class="mod-category">
                         <h3>Seguranças</h3>
